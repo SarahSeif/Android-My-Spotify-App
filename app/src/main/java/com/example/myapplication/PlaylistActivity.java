@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -143,6 +144,8 @@ public class PlaylistActivity extends AppCompatActivity  {
          arrayList.add(new Song("Song Title12","Artist12",4));
 
 */
+        Log.v("test","static app");
+
 
     }
 }
