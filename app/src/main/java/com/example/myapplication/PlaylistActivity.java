@@ -138,25 +138,25 @@ private  ArrayList<Song> AllSongs = new ArrayList<>();
 
 
 
-
+        //p.getTracks().getSongs().get(i).getAlbum().getImages().get(0).getUrl();
 //
 //        //pass pictures of songs to the next page
-//
-//        songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getApplicationContext(), MusicPlayerActivity.class);
-//                intent.putExtra("Picture",playListModel.songs.get(i).getPicture());
-//                intent.putExtra("SongTitle",playListModel.songs.get(i).getName());
-//                intent.putExtra("SongArtist",playListModel.songs.get(i).getArtist());
-//               //how to access all songs in the arraylist of the arraylist??
-//                intent.putExtra("songs",playListModel.songs);
-//                intent.putExtra("pos",i);
-//
-//                startActivity(intent);
-//            }
-//        });
-//
+
+        songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), MusicPlayerActivity.class);
+                intent.putExtra("Picture", AllSongs.get(i).getAlbum().getImages().get(0).getUrl());
+                intent.putExtra("SongTitle",AllSongs.get(i).getName());
+               // intent.putExtra("SongArtist",p.getTracks().getSongs().get(i).getArtists());
+               //how to access all songs in the arraylist of the arraylist??
+                intent.putExtra("songs",AllSongs);
+                intent.putExtra("pos",i);
+
+                startActivity(intent);
+            }
+        });
+
 
         //add the same list in every playlist
         /* arrayList = new ArrayList<>();
@@ -178,7 +178,7 @@ private  ArrayList<Song> AllSongs = new ArrayList<>();
     }
 
     public void updateData(ArrayList<Song> models) {
-       // this.AllSongs = models;
+        this.AllSongs = models;
         adapter.setData(models);
 
     }

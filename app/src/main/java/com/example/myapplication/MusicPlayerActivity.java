@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,15 +46,19 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         //get picture and name and artist of the song when clicked on a particular song
         Intent intent = getIntent();
-         int picture = intent.getExtras().getInt("Picture");
-          String SongTitle = intent.getExtras().getString("SongTitle");
-         String SongArtist = intent.getExtras().getString("SongArtist");
+         String picture = intent.getExtras().getString("Picture");
 
-        pic.setImageResource(picture);
+          String SongTitle = intent.getExtras().getString("SongTitle");
+        // String SongArtist = intent.getExtras().getParcelableArrayList("SongArtist");
+
+
+        //set pic into imageview
+        Picasso.get().load(picture).into(pic);
+       // pic.setImageResource(picture);
 
         sTitle.setText(SongTitle);
         sTitle.setSelected(true);
-        sArtist.setText(SongArtist);
+       // sArtist.setText(SongArtist);
 
 
         //activate the rest of the player
@@ -103,12 +108,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         Bundle bundle = intent.getExtras();
 
-     mysongs = (ArrayList) bundle.getParcelableArrayList("songs");
+        mysongs = (ArrayList) bundle.getParcelableArrayList("songs");
         position = bundle.getInt("pos",0);
 
-       Song song = mysongs.get(position);
-       //Uri u = Uri.parse(mysongs.get(position).toString());
-        //myMediaPlayer = MediaPlayer.create(getApplicationContext(), song.getSong());
+         Song song = mysongs.get(position);
+         Uri u = Uri.parse(song.getPreview_url());
+        myMediaPlayer = MediaPlayer.create(getApplicationContext(), u);
         myMediaPlayer.start();
         songSeekBar.setMax(myMediaPlayer.getDuration());
         updateseekBar.start();
@@ -157,9 +162,10 @@ public class MusicPlayerActivity extends AppCompatActivity {
               myMediaPlayer.release();
               position = ((position+1)%mysongs.size());
               Song song = mysongs.get(position);
-              //myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
+             Uri u = Uri.parse(song.getPreview_url());
+              myMediaPlayer = MediaPlayer.create(getApplicationContext(),u);
 
-              //pic.setImageResource(song.getPicture());
+              //pic.setImageResource(song.getAlbum().getImages().);
               sTitle.setText(song.getName());
               sTitle.setSelected(true);
               //sArtist.setText(song.getArtist());
@@ -177,7 +183,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
               myMediaPlayer.release();
               position = ((position - 1)<0)?(mysongs.size()-1):(position-1);
               Song song = mysongs.get(position);
-              //myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
+              Uri u = Uri.parse(song.getPreview_url());
+              myMediaPlayer = MediaPlayer.create(getApplicationContext(),u);
 
               //pic.setImageResource(song.getPicture());
               sTitle.setText(song.getName());

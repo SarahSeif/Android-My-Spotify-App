@@ -2,9 +2,10 @@ package com.example.myapplication;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TrackModel {
+public class TrackModel implements Serializable {
     @SerializedName("items")
     private ArrayList<Song> songs;
 

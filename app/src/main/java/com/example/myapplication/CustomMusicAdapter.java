@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,7 @@ public class CustomMusicAdapter extends BaseAdapter {
            viewHolder.ivPlay = (ImageView) convertView.findViewById(R.id.play);
            viewHolder.ivStop = (ImageView) convertView.findViewById(R.id.stop);
 
+
            convertView.setTag(viewHolder);
        }
        else{
@@ -75,7 +77,19 @@ public class CustomMusicAdapter extends BaseAdapter {
 
        final Song song = music.get(position);
        viewHolder.songTitleTv.setText(song.getName());
-       viewHolder.artistNameTv.setText(song.getArtists().get(0).toString());
+
+        String AllArtists = "";
+       for (int i = 0 ; i< song.getArtists().size(); i++){
+           if(song.getArtists().size() > 1 && i != song.getArtists().size() - 1) {
+               AllArtists = AllArtists + song.getArtists().get(i).getName() + ", ";
+           }
+           else{
+               AllArtists = AllArtists + song.getArtists().get(i).getName();
+           }
+           viewHolder.artistNameTv.setText(AllArtists);
+      // name = name1 +"," +name2 ..
+       }
+
 
 
        //play music using play button
@@ -84,7 +98,8 @@ public class CustomMusicAdapter extends BaseAdapter {
             public void onClick(View view) {
 
                 if(flag){
-                   // mediaPlayer = MediaPlayer.create(context,);
+                    Uri myUri = Uri.parse(song.getPreview_url());
+                    mediaPlayer = MediaPlayer.create(context,myUri);
                     flag = false;
                 }
                 if(mediaPlayer.isPlaying()){
@@ -121,6 +136,21 @@ public class CustomMusicAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.artistNameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String ss = "";
+                for (int i = 0 ; i < song.getArtists().size(); i++){
+                    if(song.getArtists().size() > 1 && i != song.getArtists().size() - 1) {
+                        ss = ss+ music.get(position).getArtists().get(i).getName()+ ", ";
+                    }
+                   else{
+                        ss = ss+ music.get(position).getArtists().get(i).getName();
+                    }
+                }
+                Toast.makeText((context),ss,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }

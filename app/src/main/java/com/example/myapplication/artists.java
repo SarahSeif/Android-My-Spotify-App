@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class artists {
+import java.io.Serializable;
+
+public class artists implements Serializable {
 
    private String name;
    private String id;
