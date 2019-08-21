@@ -1,12 +1,18 @@
 package com.example.myapplication;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayListModel  implements Serializable{
-    ArrayList<Song> songs;
+public class PlayListModel implements Serializable {
+    private TrackModel tracks;
 
-    public PlayListModel(ArrayList<Song> songs) {
-        this.songs = songs;
+    public TrackModel getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(TrackModel tracks) {
+        this.tracks = tracks;
     }
 }

@@ -1,53 +1,64 @@
 package com.example.myapplication;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Song implements Serializable {
-    private String Name;
-    private String Artist;
-    private int song;
-    private int picture;
+    private String name;
+    private ArrayList<artists> artists;
+    private String preview_url;
+    private album album;
 
-    public Song(String name, String artist, int song , int picture) {
-        Name = name;
-        Artist = artist;
-        this.song = song;
-        this.picture = picture;
+    public Song(String name, ArrayList<com.example.myapplication.artists> artists, String preview_url, com.example.myapplication.album album) {
+        this.name = name;
+        this.artists = artists;
+        this.preview_url = preview_url;
+        this.album = album;
+    }
+
+
+    public Song(String name, ArrayList<com.example.myapplication.artists> artists) {
+        this.name = name;
+        this.artists = artists;
     }
 
     public Song() {
     }
 
-
-    public int getPicture() {
-        return picture;
-    }
-
-    public void setPicture(int picture) {
-        this.picture = picture;
+    public Song(String name) {
+        this.name = name;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public String getArtist() {
-        return Artist;
+    public ArrayList<com.example.myapplication.artists> getArtists() {
+        return artists;
     }
 
-    public int getSong() {
-        return song;
+    public String getPreview_url() {
+        return preview_url;
+    }
+
+    public com.example.myapplication.album getAlbum() {
+        return album;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public void setArtist(String artist) {
-        Artist = artist;
+    public void setArtists(ArrayList<com.example.myapplication.artists> artists) {
+        this.artists = artists;
     }
 
-    public void setSong(int song) {
-        this.song = song;
+    public void setPreview_url(String preview_url) {
+        this.preview_url = preview_url;
+    }
+
+    public void setAlbum(com.example.myapplication.album album) {
+        this.album = album;
     }
 }
+

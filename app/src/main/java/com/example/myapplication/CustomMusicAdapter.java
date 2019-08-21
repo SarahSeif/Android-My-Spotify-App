@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +20,7 @@ public class CustomMusicAdapter extends BaseAdapter {
     private ArrayList<Song> music;
     private MediaPlayer mediaPlayer;
     private boolean flag = true;
-
+    ArrayList<Song> models = new ArrayList<>();
 
     public CustomMusicAdapter(Context context, int layout, ArrayList<Song> music) {
         this.context = context;
@@ -72,7 +75,7 @@ public class CustomMusicAdapter extends BaseAdapter {
 
        final Song song = music.get(position);
        viewHolder.songTitleTv.setText(song.getName());
-       viewHolder.artistNameTv.setText(song.getArtist());
+       viewHolder.artistNameTv.setText(song.getArtists().get(0).toString());
 
 
        //play music using play button
@@ -81,7 +84,7 @@ public class CustomMusicAdapter extends BaseAdapter {
             public void onClick(View view) {
 
                 if(flag){
-                    mediaPlayer = MediaPlayer.create(context, song.getSong());
+                   // mediaPlayer = MediaPlayer.create(context,);
                     flag = false;
                 }
                 if(mediaPlayer.isPlaying()){
@@ -120,5 +123,16 @@ public class CustomMusicAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+
+
+    public void setData(ArrayList<Song> data) {
+        if (data != null) {
+            //models.clear();
+            this.music.addAll(data);
+            this.notifyDataSetChanged();
+        }else {
+            Log.i("no data", "'no data provided");
+        }
     }
 }

@@ -108,7 +108,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
        Song song = mysongs.get(position);
        //Uri u = Uri.parse(mysongs.get(position).toString());
-        myMediaPlayer = MediaPlayer.create(getApplicationContext(), song.getSong());
+        //myMediaPlayer = MediaPlayer.create(getApplicationContext(), song.getSong());
         myMediaPlayer.start();
         songSeekBar.setMax(myMediaPlayer.getDuration());
         updateseekBar.start();
@@ -157,12 +157,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
               myMediaPlayer.release();
               position = ((position+1)%mysongs.size());
               Song song = mysongs.get(position);
-              myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
+              //myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
 
-              pic.setImageResource(song.getPicture());
+              //pic.setImageResource(song.getPicture());
               sTitle.setText(song.getName());
               sTitle.setSelected(true);
-              sArtist.setText(song.getArtist());
+              //sArtist.setText(song.getArtist());
 
               myMediaPlayer.start();
 
@@ -177,12 +177,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
               myMediaPlayer.release();
               position = ((position - 1)<0)?(mysongs.size()-1):(position-1);
               Song song = mysongs.get(position);
-              myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
+              //myMediaPlayer = MediaPlayer.create(getApplicationContext(),song.getSong());
 
-              pic.setImageResource(song.getPicture());
+              //pic.setImageResource(song.getPicture());
               sTitle.setText(song.getName());
               sTitle.setSelected(true);
-              sArtist.setText(song.getArtist());
+             // sArtist.setText(song.getArtist());
 
               myMediaPlayer.start();
           }
