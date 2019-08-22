@@ -32,7 +32,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     ArrayList<Song> mysongs;
     Thread updateseekBar;
-
+    ArrayList<artists> songArtists;
     int currentPosition = 0;
 
     @Override
@@ -45,10 +45,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
        sArtist = (TextView) findViewById(R.id.musicArtist);
 
         //get picture and name and artist of the song when clicked on a particular song
-        Intent intent = getIntent();
+         Intent intent = getIntent();
          String picture = intent.getExtras().getString("Picture");
+         String SongTitle = intent.getExtras().getString("SongTitle");
+         Bundle bundle2 = intent.getExtras();
+        songArtists = (ArrayList) bundle2.getParcelableArrayList("SongArtists");
 
-          String SongTitle = intent.getExtras().getString("SongTitle");
+
         // String SongArtist = intent.getExtras().getParcelableArrayList("SongArtist");
 
 
@@ -59,6 +62,17 @@ public class MusicPlayerActivity extends AppCompatActivity {
         sTitle.setText(SongTitle);
         sTitle.setSelected(true);
        // sArtist.setText(SongArtist);
+        String Artists = "";
+        for (int i = 0 ; i< songArtists.size(); i++){
+            if(songArtists.size() > 1 && i != songArtists.size() - 1) {
+                Artists = Artists + songArtists.get(i).getName() + ", ";
+            }
+            else{
+                Artists = Artists + songArtists.get(i).getName();
+            }
+            sArtist.setText(Artists);
+            // name = name1 +"," +name2 ..
+        }
 
 
         //activate the rest of the player
@@ -160,16 +174,31 @@ public class MusicPlayerActivity extends AppCompatActivity {
           public void onClick(View view) {
               myMediaPlayer.stop();
               myMediaPlayer.release();
+
               position = ((position+1)%mysongs.size());
               Song song = mysongs.get(position);
-             Uri u = Uri.parse(song.getPreview_url());
+              if(song.getPreview_url() == null){
+                  position = ((position+1)%mysongs.size());
+                   song = mysongs.get(position);
+              }
+              Uri u = Uri.parse(song.getPreview_url());
               myMediaPlayer = MediaPlayer.create(getApplicationContext(),u);
-
+              Picasso.get().load(song.getAlbum().getImages().get(0).getUrl()).into(pic);
               //pic.setImageResource(song.getAlbum().getImages().);
               sTitle.setText(song.getName());
               sTitle.setSelected(true);
               //sArtist.setText(song.getArtist());
-
+              String Artists = "";
+              for (int i = 0 ; i< song.getArtists().size(); i++){
+                  if(song.getArtists().size() > 1 && i != song.getArtists().size() - 1) {
+                      Artists = Artists + song.getArtists().get(i).getName() + ", ";
+                  }
+                  else{
+                      Artists = Artists + song.getArtists().get(i).getName();
+                  }
+                  sArtist.setText(Artists);
+                  // name = name1 +"," +name2 ..
+              }
               myMediaPlayer.start();
 
           }
@@ -183,13 +212,29 @@ public class MusicPlayerActivity extends AppCompatActivity {
               myMediaPlayer.release();
               position = ((position - 1)<0)?(mysongs.size()-1):(position-1);
               Song song = mysongs.get(position);
+              if(song.getPreview_url() == null){
+                  position = ((position+1)%mysongs.size());
+                  song = mysongs.get(position);
+              }
               Uri u = Uri.parse(song.getPreview_url());
               myMediaPlayer = MediaPlayer.create(getApplicationContext(),u);
-
+              Picasso.get().load(song.getAlbum().getImages().get(0).getUrl()).into(pic);
               //pic.setImageResource(song.getPicture());
               sTitle.setText(song.getName());
               sTitle.setSelected(true);
              // sArtist.setText(song.getArtist());
+              String Artists = "";
+              for (int i = 0 ; i< song.getArtists().size(); i++){
+                  if(song.getArtists().size() > 1 && i != song.getArtists().size() - 1) {
+                      Artists = Artists + song.getArtists().get(i).getName() + ", ";
+                  }
+                  else{
+                      Artists = Artists + song.getArtists().get(i).getName();
+                  }
+                  sArtist.setText(Artists);
+                  // name = name1 +"," +name2 ..
+              }
+
 
               myMediaPlayer.start();
           }

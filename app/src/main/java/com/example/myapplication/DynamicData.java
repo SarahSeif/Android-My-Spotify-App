@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class DynamicData extends AsyncTask<String,Void,String> {
     PlaylistActivity myPlayListactivity;
-    String token = "BQCCn3KauYaez9hu_Zsu_IoQ6Do0SEZsO3s1KUFi96YwOVbsrI8n3R9P63q9svsRYdEAW4V75F34-PX_GmaWLRAC1yqg28pvH5aFF6tW8v2dV2a3Dm3HMnU8kjadLX736-DYMBKYaprK5wYp6bByZIW3xN3zOpcaPyfGtuiJMcVINrDCskdsaY46cxhP12TgbrJI5K4Gk6RtwtDJcOzelV-yY6KQXYayBx5yIyNIY1NgrmqjXhzkNAnsL3CzPv7C6l3-uAKa0J9zNhE6eE7Q0OFkTa5Po5I4";
+    String token = "BQA7lI4ntKvlB33fnLcRKx3FX5xuyHLWs8petLEMvjtDLFk01zBD8xOD3G1D45FkHxwonltIYsXvSXcxZcV8i6KTNxS9U1RcF0waOH6ZdD3SYamqQwpPW9odwyCGWc8QOejezOQNkcCpW3FplDjup8ObTCH_aiRQoUZyV3lTmF_ShXX3jx89qFCu9Kke9p2R4gkIGIurngv9YJ3TAebtpdoptT1cfIpXy95ft2EM4vWv5BA0OPftrARJTLfC-dKNcgdH8ma7nDIS8yFWpW4LArQg47PRI8EU";
     public DynamicData(PlaylistActivity activity) {
         this.myPlayListactivity = activity;
     }
@@ -58,15 +58,16 @@ public class DynamicData extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String data) {
         if (data != null) {
             Gson gson = new Gson();
-// data => json object
-            // data => data.items
-            //JSONObject obj = new JSONObject(data);
-
             PlayListModel response = gson.fromJson(data, PlayListModel.class);
+
+            for(int i = 0; i< response.getTracks().getSongs().size() ; i++) {
+                if (response.getTracks().getSongs().get(i).getPreview_url() == null){
+                    response.getTracks().getSongs().remove(i);
+                }
+            }
 
        myPlayListactivity.updateData(response.getTracks().getSongs());
 
         }
     }
-//private static HttpURLConnection connection;
 }

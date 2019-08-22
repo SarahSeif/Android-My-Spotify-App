@@ -67,12 +67,12 @@ private  ArrayList<Song> AllSongs = new ArrayList<>();
 
 
         switch (position){
-             case 0: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Bruno%20Mars&type=track&market=US&limit=10");break;
-             case 1: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=alan%20walker&type=track&market=US&limit=10");break;
-             case 2: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=kenny%20g%20&type=track&market=US&limit=10");break;
-             case 3: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Drake&type=track&market=US&limit=10");break;
-             case 4: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Eminem&type=track&market=US&limit=10");break;
-             case 5: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Enrique%20Iglesias&type=track&market=US&limit=10");break;
+             case 0: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Bruno%20Mars&type=track&market=US&limit=25");break;
+             case 1: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=alan%20walker&type=track&market=US&limit=25");break;
+             case 2: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=kenny%20g%20&type=track&market=US&limit=25");break;
+             case 3: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Drake&type=track&market=US&limit=25");break;
+             case 4: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Eminem&type=track&market=US&limit=25");break;
+             case 5: new DynamicData(PlaylistActivity.this).execute("https://api.spotify.com/v1/search?q=Enrique%20Iglesias&type=track&market=US&limit=25");break;
              default: break;
          }
 
@@ -148,7 +148,7 @@ private  ArrayList<Song> AllSongs = new ArrayList<>();
                 Intent intent = new Intent(getApplicationContext(), MusicPlayerActivity.class);
                 intent.putExtra("Picture", AllSongs.get(i).getAlbum().getImages().get(0).getUrl());
                 intent.putExtra("SongTitle",AllSongs.get(i).getName());
-               // intent.putExtra("SongArtist",p.getTracks().getSongs().get(i).getArtists());
+                intent.putExtra("SongArtists",AllSongs.get(i).getArtists());
                //how to access all songs in the arraylist of the arraylist??
                 intent.putExtra("songs",AllSongs);
                 intent.putExtra("pos",i);
